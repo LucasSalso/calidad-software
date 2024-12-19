@@ -54,7 +54,7 @@ pipeline {
         }
     }
 
-    post {
+   /* post {
         always {
             // Envío de correo con el resultado del pipeline
             mail to: 'lucasalso@hotmail.com',
@@ -68,5 +68,5 @@ pipeline {
         failure {
             echo 'Pipeline failed. Check logs for details.'
         }
-    }
+    }*/
 }
