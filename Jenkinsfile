@@ -5,6 +5,8 @@ pipeline {
         // Define variables de entorno (modifica según tu configuración)
         JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'
         MAVEN_HOME = 'C:\\Program Files\\apache-maven-3.8.7'
+        SONAR_HOST_URL = 'http://localhost:9000'
+        SONAR_AUTH_TOKEN = credentials('jenkins-sonar') // Credenciales configuradas en Jenkins
     }
 
     stages {
@@ -37,12 +39,18 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv(installationName: 'Sonar') { // Usa el nombre de tu configuración de SonarQube en Jenkins
-                    bat 'mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar'
+                    steps {
+                        withSonarQubeEnv(installationName: 'Sonar') { // Usa el nombre de tu configuración de SonarQube en Jenkins
+                            // Ejecuta el análisis de SonarQube, habilitando las preview features si es necesario
+                            bat """
+                                mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar \
+                                    -Dsonar.host.url=${SONAR_HOST_URL} \
+                                    -Dsonar.login=${SONAR_AUTH_TOKEN} \
+                                    -Dsonar.java.enablePreview=true
+                            """
+                        }
+                    }
                 }
-            }
-        }
 
         stage('Package and Archive') {
             steps {
