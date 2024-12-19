@@ -21,7 +21,7 @@ public class CampeonTest {
         Habilidad h = campeon.getHabilidades().get(0);
         assertEquals("Golpe Poderoso", h.getNombre());
         assertEquals(100, h.getDano());
-        assertEquals("daño", h.getTipo());
+        assertEquals("danio", h.getTipo());
     }
 
     @Test
