@@ -41,9 +41,9 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'Sonar') {
-                    // Usa la versión 3.9.1.2184 de sonar-maven-plugin
+                    // Ejecuta el análisis de SonarQube después de la compilación y pruebas
                     bat """
-                        mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar \
+                        mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar \
                             -Dsonar.host.url=${SONAR_HOST_URL} \
                             -Dsonar.login=${SONAR_AUTH_TOKEN} \
                             -Dsonar.java.binaries=target/classes
@@ -61,7 +61,7 @@ pipeline {
         }
     }
 
-   /* post {
+    post {
         always {
             // Envío de correo con el resultado del pipeline
             mail to: 'lucasalso@hotmail.com',
@@ -75,5 +75,5 @@ pipeline {
         failure {
             echo 'Pipeline failed. Check logs for details.'
         }
-    }*/
+    }
 }
