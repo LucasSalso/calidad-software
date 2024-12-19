@@ -41,7 +41,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'Sonar') { // Usa el nombre de tu configuración de SonarQube en Jenkins
-                    bat 'mvn sonar:sonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}'
+                    bat 'mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar'
                 }
             }
         }
