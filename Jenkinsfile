@@ -61,10 +61,10 @@ pipeline {
         }
     }
 
-    post {
+   /* post {
         always {
             // Envío de correo con el resultado del pipeline
-            mail to: 'lucasalso97@gmail.com',
+            mail to: 'XXXX@gmail.com',
                  subject: "Pipeline: ${currentBuild.fullDisplayName} - ${currentBuild.currentResult}",
                  body: """Pipeline result: ${currentBuild.currentResult}
                           Build URL: ${env.BUILD_URL}"""
@@ -75,5 +75,5 @@ pipeline {
         failure {
             echo 'Pipeline failed. Check logs for details.'
         }
-    }
+    }*/
 }
