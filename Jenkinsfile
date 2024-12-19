@@ -64,7 +64,7 @@ pipeline {
     post {
         always {
             // Envío de correo con el resultado del pipeline
-            mail to: 'lucasalso@hotmail.com',
+            mail to: 'lucasalso97@gmail.com',
                  subject: "Pipeline: ${currentBuild.fullDisplayName} - ${currentBuild.currentResult}",
                  body: """Pipeline result: ${currentBuild.currentResult}
                           Build URL: ${env.BUILD_URL}"""
