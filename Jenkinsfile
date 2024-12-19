@@ -39,18 +39,17 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-                    steps {
-                        withSonarQubeEnv(installationName: 'Sonar') { // Usa el nombre de tu configuración de SonarQube en Jenkins
-                            // Ejecuta el análisis de SonarQube, habilitando las preview features si es necesario
-                            bat """
-                                mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar \
-                                    -Dsonar.host.url=${SONAR_HOST_URL} \
-                                    -Dsonar.login=${SONAR_AUTH_TOKEN} \
-                                    -Dsonar.java.enablePreview=true
-                            """
-                        }
-                    }
+            steps {
+                withSonarQubeEnv(installationName: 'Sonar') {
+                    // Usa la versión 3.9.1.2184 de sonar-maven-plugin
+                    bat """
+                        mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar \
+                            -Dsonar.host.url=${SONAR_HOST_URL} \
+                            -Dsonar.login=${SONAR_AUTH_TOKEN}
+                    """
                 }
+            }
+        }
 
         stage('Package and Archive') {
             steps {
