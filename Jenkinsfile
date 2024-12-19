@@ -5,7 +5,7 @@ pipeline {
         // Define variables de entorno (modifica según tu configuración)
         MAVEN_HOME = 'C:\\Program Files\\apache-maven-3.8.7'
         SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_AUTH_TOKEN = credentials('sonar-auth-token') // Credenciales configuradas en Jenkins
+       // SONAR_AUTH_TOKEN = credentials('sonar-auth-token') // Credenciales configuradas en Jenkins
     }
 
     stages {
@@ -37,13 +37,13 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        /*stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') { // Usa el nombre de tu configuración de SonarQube en Jenkins
                     bat "\"${MAVEN_HOME}\\bin\\mvn\" sonar:sonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}"
                 }
             }
-        }
+        }*/
 
         stage('Package and Archive') {
             steps {
