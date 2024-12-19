@@ -6,7 +6,7 @@ pipeline {
         JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'
         MAVEN_HOME = 'C:\\Program Files\\apache-maven-3.8.7'
         SONAR_HOST_URL = 'http://localhost:9000'
-       // SONAR_AUTH_TOKEN = credentials('sonar-auth-token') // Credenciales configuradas en Jenkins
+        SONAR_AUTH_TOKEN = credentials('jenkins-sonar') // Credenciales configuradas en Jenkins
     }
 
     stages {
@@ -27,7 +27,7 @@ pipeline {
         stage('Unit and Integration Tests') {
             steps {
                 // Ejecuta pruebas unitarias y de integración
-                bat "\"${MAVEN_HOME}\\bin\\mvn\" test verify"
+                bat 'mvn test verify'
             }
         }
 
@@ -38,18 +38,18 @@ pipeline {
             }
         }
 
-        /*stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') { // Usa el nombre de tu configuración de SonarQube en Jenkins
-                    bat "\"${MAVEN_HOME}\\bin\\mvn\" sonar:sonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}"
+                withSonarQubeEnv(installationName: 'Sonar') { // Usa el nombre de tu configuración de SonarQube en Jenkins
+                    bat 'mvn sonar:sonar -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_AUTH_TOKEN}'
                 }
             }
-        }*/
+        }
 
         stage('Package and Archive') {
             steps {
                 // Empaqueta el proyecto y archiva el artefacto generado
-                bat "\"${MAVEN_HOME}\\bin\\mvn\" package"
+                bat 'mvn package'
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
