@@ -5,8 +5,6 @@ pipeline {
         // Define variables de entorno (modifica según tu configuración)
         JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'
         MAVEN_HOME = 'C:\\Program Files\\apache-maven-3.8.7'
-        SONAR_HOST_URL = 'http://localhost:9000'
-        SONAR_AUTH_TOKEN = credentials('jenkins-sonar') // Credenciales configuradas en Jenkins
     }
 
     stages {
