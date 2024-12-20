@@ -42,12 +42,7 @@ pipeline {
             steps {
                 withSonarQubeEnv(installationName: 'Sonar') {
                     // Ejecuta el análisis de SonarQube después de la compilación y pruebas
-                    bat """
-                        mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar \
-                            -Dsonar.host.url=${SONAR_HOST_URL} \
-                            -Dsonar.login=${SONAR_AUTH_TOKEN} \
-                            -Dsonar.java.binaries=target/classes
-                    """
+                    bat "mvn sonar:sonar"
                 }
             }
         }
