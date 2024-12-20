@@ -47,6 +47,7 @@ pipeline {
                             -Dsonar.host.url=${SONAR_HOST_URL} \
                             -Dsonar.login=${SONAR_AUTH_TOKEN} \
                             -Dsonar.java.binaries=target/classes
+                            -Dsonar.java.coverage.reportPath=..\reports\coverage.xml
                     """
                 }
             }
